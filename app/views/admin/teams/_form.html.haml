@@ -1,0 +1,7 @@
+= simple_form_for([:admin, @team], html: { data: { turbo: false } }) do |f|
+  .bg-gray-300.p-4.rounded
+    = f.input :name
+    = f.input :trainner
+
+  = f.button :submit, class: ' btn-primary '
+  = link_to( 'Volver', admin_teams_path, class: ' btn-secondary ')

@@ -1,0 +1,32 @@
+%div
+
+  %h2.h2 Listado de Equipos
+
+  -# = simple_form_for(:filter, url: admin_patients_path, method: :get, html: { class: 'flex space-x-2' }) do |f|
+  -#   = f.input :query, label: false, placeholder: 'Buscar paciente', input_html: { value: params[:filter].try(:[], :query), class: 'my-2' }
+  -#   = f.button :submit, 'Buscar'
+  -#   = link_to('Mostrar todos', admin_patients_path, class: 'btn-primary')
+  -#   = link_to('Sólo los de hoy', admin_patients_path(today: 1), class: 'btn-primary')
+
+  .py-4.mb-4
+    = link_to( 'Nuevo', new_admin_team_path, class: 'btn-primary')
+
+  .relative.overflow-x-auto
+    %table.table
+      %thead.thead
+        %tr
+          %th.px-6.py-3{:scope => "col"}
+            = Team.human_attribute_name(:name)
+          %th.px-6.py-3{:scope => "col"}
+            = Team.human_attribute_name(:trainner)
+          %th.px-6.py-3{:scope => "col"}
+
+      %tbody
+        - @teams.each do |team|
+          %tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
+            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+              = team.name
+            %td.px-6.py-4
+              = team.trainner
+            %td.px-6.py-4
+              = link_to( Team.model_name.human, edit_admin_team_path(team), class: 'btn-primary btn-small')
