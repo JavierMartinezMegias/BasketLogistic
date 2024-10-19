@@ -9,7 +9,8 @@
     = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = javascript_importmap_tags
-  %body
-    %main.container.mx-auto.mt-28.px-5.flex
-      %div
-        = yield
+  %body.bg-amber-50
+    %header.bg-slate-800.shadow-lg.py-5.shadow-slate-700
+      %h1.h1= link_to('BasketLogistic', admin_root_path)
+    %div.container.mx-auto.mt-10.mb-10.px-10
+      = yield

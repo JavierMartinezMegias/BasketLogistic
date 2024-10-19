@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     resources :teams do
       resources :players do
-        resources :traning_days
+        resources :training_days
       end
     end  
   end  

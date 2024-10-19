@@ -1,0 +1,15 @@
+es:
+  activerecord:
+    models:
+      player:
+        one: Jugador
+        other: Jugadores
+    attributes:
+      player:
+        name: Nombre
+        height: Altura
+        wingspan: Envergadura
+        weight: Peso
+        birthday: Fecha de nacimiento
+        dorsal: Dorsal
+        position: Posición
