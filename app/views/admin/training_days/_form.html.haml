@@ -1,0 +1,12 @@
+= simple_form_for([:admin, @team, @player, @training_day], html: { data: { turbo: false } }) do |f|
+  .bg-gray-300.p-4.rounded
+    = f.input :training_date 
+    = f.input :free_throws_scored
+    = f.input :free_throws_totals
+    = f.input :two_point_shots_scored
+    = f.input :two_point_shots_totals
+    = f.input :three_points_shots_scored
+    = f.input :three_points_shots_totals 
+
+  = f.button :submit, class: ' btn-primary '
+  = link_to( 'Volver', admin_teams_path, class: ' btn-secondary ')

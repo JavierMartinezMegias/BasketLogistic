@@ -1,32 +1,26 @@
-%div
 
-  %h2.h2 Listado de Equipos
 
-  -# = simple_form_for(:filter, url: admin_patients_path, method: :get, html: { class: 'flex space-x-2' }) do |f|
-  -#   = f.input :query, label: false, placeholder: 'Buscar paciente', input_html: { value: params[:filter].try(:[], :query), class: 'my-2' }
-  -#   = f.button :submit, 'Buscar'
-  -#   = link_to('Mostrar todos', admin_patients_path, class: 'btn-primary')
-  -#   = link_to('Sólo los de hoy', admin_patients_path(today: 1), class: 'btn-primary')
+%h2.h2 EQUIPOS
 
-  .py-4.mb-4
-    = link_to( 'Nuevo', new_admin_team_path, class: 'btn-primary')
+-# = simple_form_for(:filter, url: admin_patients_path, method: :get, html: { class: 'flex space-x-2' }) do |f|
+-#   = f.input :query, label: false, placeholder: 'Buscar paciente', input_html: { value: params[:filter].try(:[], :query), class: 'my-2' }
+-#   = f.button :submit, 'Buscar'
+-#   = link_to('Mostrar todos', admin_patients_path, class: 'btn-primary')
+-#   = link_to('Sólo los de hoy', admin_patients_path(today: 1), class: 'btn-primary')
 
-  .relative.overflow-x-auto
-    %table.table
-      %thead.thead
-        %tr
-          %th.px-6.py-3{:scope => "col"}
-            = Team.human_attribute_name(:name)
-          %th.px-6.py-3{:scope => "col"}
-            = Team.human_attribute_name(:trainner)
-          %th.px-6.py-3{:scope => "col"}
+.py-4.mb-4
+  = link_to('+', new_admin_team_path, class: 'btn-secondary')
 
-      %tbody
-        - @teams.each do |team|
-          %tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
-            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
-              = team.name
-            %td.px-6.py-4
-              = team.trainner
-            %td.px-6.py-4
-              = link_to( Team.model_name.human, edit_admin_team_path(team), class: 'btn-primary btn-small')
+.grid.grid-cols-3.gap-4
+  - @teams.each do |team|
+    .p-6.border.rounded-lg.shadow.hover:bg-slate-100.bg-slate-800.border-slate-700.hover:bg-slate-900
+      .grid.grid-cols-2.gap-2
+        - if team.icon.attached?
+          = image_tag team.icon.variant(:thumb)
+        = link_to admin_team_players_path(team) do
+          %h5.mb-2.text-2xl.font-bold.tracking-tight.text-white= team.name
+          %p.font-normal.text-slate-700.dark:text-gray-300= team.trainner
+          %div.mt-4
+            = link_to('Editar', edit_admin_team_path(team), class: 'btn-primary btn-small')
+            = link_to('Eliminar', admin_team_path(team), data: { turbo_method: :delete, turbo_confirm: '¿Estás seguro de que deseas eliminar este equipo?' },  class: 'btn-delete btn-small')
+

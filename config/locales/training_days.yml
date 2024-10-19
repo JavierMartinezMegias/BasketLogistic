@@ -1,0 +1,15 @@
+es:
+  activerecord:
+    models:
+      training_day:
+        one: Entrenamiento
+        other: Entrenamientos
+    attributes:
+      training_day:
+        free_throws_scored: TL anotados
+        two_point_shots_scored: T2 anotados
+        three_points_shots_scored: T3 anotados
+        free_throws_totals: TL tirados
+        two_point_shots_totals: T2 tirados
+        three_points_shots_totals: T3 tirados
+        training_date: Fecha del entrenamiento

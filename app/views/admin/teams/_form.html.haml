@@ -2,6 +2,7 @@
   .bg-gray-300.p-4.rounded
     = f.input :name
     = f.input :trainner
+    = f.file_field :icon
 
-  = f.button :submit, class: ' btn-primary '
+  = f.button :submit, class: ' btn-secondary '
   = link_to( 'Volver', admin_teams_path, class: ' btn-secondary ')

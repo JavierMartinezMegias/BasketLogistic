@@ -1,6 +1,6 @@
 class Admin::TeamsController < AdminController
   def index
-    @pagy, @teams = pagy(Team.ordered, items: 10)
+    @pagy, @teams = pagy(Team.with_attached_icon.ordered, items: 10)
   end
 
   def new
@@ -29,10 +29,17 @@ class Admin::TeamsController < AdminController
     end
   end
 
+  def destroy
+    @team = load_team
+    @team.destroy
+
+    redirect_to admin_teams_path, notice: "Equipo eliminado correctamente"
+  end
+
   private
 
     def team_params
-      params.require(:team).permit(:name, :trainner)
+      params.require(:team).permit(:name, :trainner, :icon)
     end
 
     def load_team

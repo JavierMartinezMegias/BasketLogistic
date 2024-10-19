@@ -1,0 +1,10 @@
+es:
+  activerecord:
+    models:
+      team:
+        one: Equipo
+        other: Equipos
+    attributes:
+      team:
+        name: Nombre
+        trainner: Entrenador

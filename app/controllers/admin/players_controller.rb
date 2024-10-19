@@ -1,20 +1,24 @@
 class Admin::PlayersController < AdminController
   def index
-    @pagy, @players = pagy(Player.ordered, items: 10)
+    @team = load_team
+    @pagy, @players = pagy(@team.players.ordered, items: 10)
   end
 
   def new
+    @team = load_team
     @player = Player.new
   end
 
   def edit
+    @team = load_team
     @player = load_player
   end
 
   def create
-    @player = Player.new(player_params)
+    @team = load_team
+    @player = @team.players.new(player_params)
     if @player.save
-      redirect_to admin_players_path, notice: "Jugador creado correctamente"
+      redirect_to admin_team_players_path, notice: "Jugador creado correctamente"
     else
       render :new
     end
@@ -23,7 +27,7 @@ class Admin::PlayersController < AdminController
   def update
     @player = load_player
     if @player.update(player_params)
-      redirect_to admin_players_path, notice: "Jugador actualizado correctamente"
+      redirect_to admin_team_players_path, notice: "Jugador actualizado correctamente"
     else
       render :edit
     end
@@ -36,6 +40,10 @@ class Admin::PlayersController < AdminController
     end
 
     def load_player
-      Player.find(params[:id])
+      load_team.players.find(params[:id])
+    end
+
+    def load_team
+      Team.find(params[:team_id])
     end
 end

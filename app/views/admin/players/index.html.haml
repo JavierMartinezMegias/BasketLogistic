@@ -1,0 +1,44 @@
+%div
+
+  %h2.h2 Listado de jugadores
+
+  -# = simple_form_for(:filter, url: admin_patients_path, method: :get, html: { class: 'flex space-x-2' }) do |f|
+  -#   = f.input :query, label: false, placeholder: 'Buscar paciente', input_html: { value: params[:filter].try(:[], :query), class: 'my-2' }
+  -#   = f.button :submit, 'Buscar'
+  -#   = link_to('Mostrar todos', admin_patients_path, class: 'btn-primary')
+  -#   = link_to('Sólo los de hoy', admin_patients_path(today: 1), class: 'btn-primary')
+
+  .py-4.mb-4
+    = link_to( 'Nuevo', new_admin_team_player_path, class: 'btn-primary')
+
+  .relative.overflow-x-auto
+    %table.table
+      %thead.thead
+        %tr
+          %th.px-6.py-3{:scope => "col"}
+            = Player.human_attribute_name(:name)
+          %th.px-6.py-3{:scope => "col"}
+            = Player.human_attribute_name(:height)
+          %th.px-6.py-3{:scope => "col"}
+            = Player.human_attribute_name(:weight)
+          %th.px-6.py-3{:scope => "col"}
+            = Player.human_attribute_name(:position)
+          %th.px-6.py-3{:scope => "col"}
+
+      %tbody
+        - @players.each do |player|
+          %tr.bg-white.border-b.dark:bg-gray-800.dark:border-gray-700
+            %th.px-6.py-4.font-medium.text-gray-900.whitespace-nowrap.dark:text-white{:scope => "row"}
+              = player.name
+            %td.px-6.py-4
+              = player.height
+            %td.px-6.py-4
+              = player.weight
+            %td.px-6.py-4
+              = player.position
+            %td.px-6.py-4
+              = link_to( Player.model_name.human, edit_admin_team_player_path(@team, player), class: 'btn-primary btn-small')
+              = link_to( TrainingDay.model_name.human, admin_team_player_training_days_path(@team, player), class: 'btn-primary btn-small')
+  .py-4.mb-4
+    = link_to( 'Volver', admin_teams_path, class: 'btn-secondary')
+
